@@ -1,9 +1,11 @@
+import { ClientRepository } from '../Repositories/ClientRepoitory';
+
 export class ClientService {
-	numberCPF: any;
+	private numberCPF: any;
 
-	private clientRepository;
+	private clientRepository = new ClientRepository();
 
-	verifyCpf(cpf: string) {
+	async verifyCpf(name: string, cpf: string, birthday: string) {
 		// Remove all chars equals to "-" and "."
 		this.numberCPF = cpf.replace(/[. -]/g, '');
 
@@ -12,12 +14,16 @@ export class ClientService {
 			!this.checkSecondValidateNumber() ||
 			!this.verifyDuplicateNumbers()
 		) {
-			return false;
+			throw new Error('CPF invalido');
 		}
-		return true;
+
+		if (this.clientRepository.getClientBy(this.numberCPF)) {
+			throw new Error('Conflict');
+		}
+		return await this.clientRepository.create(name, this.numberCPF, birthday);
 	}
 
-	checkFirstValidateNumber() {
+	private checkFirstValidateNumber() {
 		let firstSum = 0;
 		const firstCheckerCPFNumber = Number(
 			this.numberCPF[this.numberCPF.length - 2]
@@ -43,7 +49,7 @@ export class ClientService {
 		return true;
 	}
 
-	checkSecondValidateNumber() {
+	private checkSecondValidateNumber() {
 		let secondSum = 0;
 		const secondCheckerCPFNumber = Number(
 			this.numberCPF[this.numberCPF.length - 1]
@@ -68,7 +74,7 @@ export class ClientService {
 		return true;
 	}
 
-	verifyDuplicateNumbers() {
+	private verifyDuplicateNumbers() {
 		let isEveryEquals: boolean = true;
 		for (let i = this.numberCPF.length; i > 0; i--) {
 			const currentNumber = this.numberCPF[i];
