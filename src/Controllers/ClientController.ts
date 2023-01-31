@@ -3,7 +3,6 @@ import { ClientService } from '../Services/ClientService';
 
 export class ClientController {
 	private clientService = new ClientService();
-	constructor() {}
 
 	create(req: Request, res: Response) {
 		const {
