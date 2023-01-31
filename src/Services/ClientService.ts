@@ -1,31 +1,18 @@
 import { ClientRepository } from '../Repositories/ClientRepoitory';
-import {
-	conflictError,
-	notFoundError,
-	wrongSchemaError,
-} from '../Utils/ErrorUtils';
+import { conflictError, notFoundError } from '../Utils/ErrorUtils';
+import { CPFValidator } from './CPFService';
 
-export class ClientService {
-	private numberCPF: any;
-
+export class ClientService extends CPFValidator {
 	private clientRepository = new ClientRepository();
 
-	async verifyCpf(name: string, cpf: string, birthday: string) {
+	async createClient(name: string, cpf: string, birthdate: string) {
 		// Remove all chars equals to "-" and "."
 		this.numberCPF = cpf.replace(/[. -]/g, '');
 
-		if (
-			!this.checkFirstValidateNumber() ||
-			!this.checkSecondValidateNumber() ||
-			!this.verifyDuplicateNumbers()
-		) {
-			throw wrongSchemaError('Invalid type of CPF');
-		}
+		this.veriffyCPFValidate();
+		this.verifyCpfExist();
 
-		if (this.clientRepository.getClientBy(this.numberCPF)) {
-			throw conflictError('This CPF already has been registered');
-		}
-		return await this.clientRepository.create(name, this.numberCPF, birthday);
+		return await this.clientRepository.create(name, this.numberCPF, birthdate);
 	}
 
 	async getClient(cpf: string) {
@@ -33,75 +20,25 @@ export class ClientService {
 		this.numberCPF = cpf.replace(/[. -]/g, '');
 
 		// Verify cpf format
+		this.veriffyCPFValidate();
 
-		if (!this.clientRepository.getClientBy(this.numberCPF)) {
-			throw notFoundError('This CPF was not found');
-		}
+		// Verify user exist on database
+		await this.verifyCpfNotExist();
 
 		return this.clientRepository.getClientBy(this.numberCPF);
 	}
 
-	private checkFirstValidateNumber() {
-		let firstSum = 0;
-		const firstCheckerCPFNumber = Number(
-			this.numberCPF[this.numberCPF.length - 2]
-		);
-
-		for (let i = this.numberCPF.length; i > 2; i--) {
-			firstSum += Number(this.numberCPF[this.numberCPF.length - i]) * (i - 1);
+	async verifyCpfExist() {
+		const clientByCPF = await this.clientRepository.getClientBy(this.numberCPF);
+		if (clientByCPF) {
+			throw conflictError('This CPF already has been registered');
 		}
-
-		let firstChecker = 11 - (firstSum % 11);
-
-		if (firstChecker >= 10) {
-			// Para valor maior ou igual que 10, o verificador deve ser zero
-			if (firstCheckerCPFNumber !== 0) {
-				return false;
-			}
-		} else {
-			if (firstCheckerCPFNumber !== firstChecker) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
-	private checkSecondValidateNumber() {
-		let secondSum = 0;
-		const secondCheckerCPFNumber = Number(
-			this.numberCPF[this.numberCPF.length - 1]
-		);
-
-		for (let i = this.numberCPF.length; i >= 2; i--) {
-			secondSum += Number(this.numberCPF[this.numberCPF.length - i]) * i;
+	async verifyCpfNotExist() {
+		const clientByCPF = await this.clientRepository.getClientBy(this.numberCPF);
+		if (!clientByCPF) {
+			throw notFoundError('This CPF was not found');
 		}
-
-		let secondChecker = 11 - (secondSum % 11);
-
-		if (secondChecker >= 10) {
-			if (secondCheckerCPFNumber !== 0) {
-				return false;
-			}
-		} else {
-			if (secondCheckerCPFNumber !== secondChecker) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	private verifyDuplicateNumbers() {
-		let isEveryEquals: boolean = true;
-		for (let i = this.numberCPF.length; i > 0; i--) {
-			const currentNumber = this.numberCPF[i];
-			if (currentNumber !== this.numberCPF[0]) isEveryEquals = false;
-		}
-		if (this.numberCPF.length !== 11 || isEveryEquals) {
-			return false;
-		}
-
-		return true;
 	}
 }
