@@ -3,8 +3,6 @@ export class ClientService {
 
 	private clientRepository;
 
-	constructor() {}
-
 	verifyCpf(cpf: string) {
 		// Remove all chars equals to "-" and "."
 		this.numberCPF = cpf.replace(/[. -]/g, '');
