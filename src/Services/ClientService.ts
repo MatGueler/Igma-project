@@ -1,5 +1,9 @@
 import { ClientRepository } from '../Repositories/ClientRepoitory';
-import { conflictError, wrongSchemaError } from '../Utils/ErrorUtils';
+import {
+	conflictError,
+	notFoundError,
+	wrongSchemaError,
+} from '../Utils/ErrorUtils';
 
 export class ClientService {
 	private numberCPF: any;
@@ -22,6 +26,19 @@ export class ClientService {
 			throw conflictError('This CPF already has been registered');
 		}
 		return await this.clientRepository.create(name, this.numberCPF, birthday);
+	}
+
+	async getClient(cpf: string) {
+		// Remove all chars equals to "-" and "."
+		this.numberCPF = cpf.replace(/[. -]/g, '');
+
+		// Verify cpf format
+
+		if (!this.clientRepository.getClientBy(this.numberCPF)) {
+			throw notFoundError('This CPF was not found');
+		}
+
+		return this.clientRepository.getClientBy(this.numberCPF);
 	}
 
 	private checkFirstValidateNumber() {
