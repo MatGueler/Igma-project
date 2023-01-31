@@ -12,6 +12,15 @@ export class ClientController {
 		}: { name: string; cpf: string; birthday: string } = req.body;
 
 		await this.clientService.verifyCpf(name, cpf, birthday);
+
 		return res.status(201).send({ name, cpf, birthday });
+	}
+
+	async getClientByCPF(req: Request, res: Response) {
+		const { cpf }: { name: string; cpf: string; birthday: string } = req.body;
+
+		const client = await this.clientService.getClient(cpf);
+
+		return res.status(201).send(client);
 	}
 }
