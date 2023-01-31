@@ -1,5 +1,9 @@
 import { ClientRepository } from '../Repositories/ClientRepoitory';
-import { conflictError, notFoundError } from '../Utils/ErrorUtils';
+import {
+	conflictError,
+	notFoundError,
+	wrongSchemaError,
+} from '../Utils/ErrorUtils';
 import { CPFValidator } from './CPFService';
 
 export class ClientService extends CPFValidator {
@@ -26,6 +30,18 @@ export class ClientService extends CPFValidator {
 		await this.verifyCpfNotExist();
 
 		return this.clientRepository.getClientBy(this.numberCPF);
+	}
+
+	async getAllClients(page: number, limit: number) {
+		if (page < 1 || limit < 0) {
+			throw wrongSchemaError('This of page or limit is invalid');
+		}
+
+		// Calculate where start the page by according with limit
+		const initial = (page - 1) * limit;
+
+		const clients = this.clientRepository.getClients(initial, limit);
+		return clients;
 	}
 
 	async verifyCpfExist() {

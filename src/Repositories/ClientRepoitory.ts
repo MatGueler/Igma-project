@@ -15,4 +15,11 @@ export class ClientRepository {
 			where: { cpf },
 		});
 	}
+
+	async getClients(initial: number, limit: number) {
+		return prisma.clients.findMany({
+			skip: initial,
+			take: limit,
+		});
+	}
 }

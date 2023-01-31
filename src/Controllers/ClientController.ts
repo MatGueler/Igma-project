@@ -23,4 +23,15 @@ export class ClientController {
 
 		return res.status(201).send(client);
 	}
+
+	async getAllClients(req: Request, res: Response) {
+		const { page = 1, limit = 10 } = req.query;
+
+		const clients = await this.clientService.getAllClients(
+			Number(page),
+			Number(limit)
+		);
+
+		return res.status(201).send(clients);
+	}
 }
