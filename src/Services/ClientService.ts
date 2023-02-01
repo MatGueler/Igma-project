@@ -13,8 +13,11 @@ export class ClientService extends CPFValidator {
 		// Remove all chars equals to "-" and "."
 		this.numberCPF = cpf.replace(/[. -]/g, '');
 
+		// Verify cpf format
 		this.veriffyCPFValidate();
-		this.verifyCpfExist();
+
+		// Verify user exist on database
+		await this.verifyCpfExist();
 
 		return await this.clientRepository.create(name, this.numberCPF, birthdate);
 	}

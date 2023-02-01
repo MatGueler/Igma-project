@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon ./src/Server.ts",
-    "prisma:migrate":"npx prisma migrate dev"
+    "build": "tsc",
+    "dev": "nodemon ./src/Server.ts",
+    "start": "npx prisma generate && npx prisma migrate dev && node dist/Server.js",
+    "prisma:migrate": "npx prisma migrate dev",
+    "docker:start":"sudo docker compose up --build"
   },
   "author": "",
   "license": "ISC",
