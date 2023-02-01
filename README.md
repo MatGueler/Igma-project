@@ -97,10 +97,19 @@ npx prisma migrate dev
 
 - ### Docker
 
-Para inicializar a aplicação utilizando Docker, é necessário que o [Docker](https://docs.docker.com/) esteja instalado na sua máquina. Para utilizar nesse projeto, basta inicializar o comando abaixo, sempre lembrando de alterar o arquivo **.env** corretamente:
+Para inicializar a aplicação utilizando Docker, é necessário que o [Docker](https://docs.docker.com/) esteja instalado na sua máquina.
+Além disso, lembre de alterar o arquivo **.env** corretamente como mostrado no arquivo **.env.exemple**.
+
+A variável DATABASE_URL pode ser preenchida da seguinte forma:
 
 ```
-docker:start
+DATABASE_URL="postgresql://postgres:postgres@db_postgres_clients:5432/DatabaseName?schema=public"
+```
+
+Para inicializar os containers nesse projeto, basta rodar o comando abaixo:
+
+```
+npm run docker:start
 ```
 
 ---
