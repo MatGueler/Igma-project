@@ -59,21 +59,7 @@ GET '/clients' ou '/clients?page=1&&limit'
 
 ## 🏁 Rodando a aplicação
 
-- ### Arquivo **.env**
-
-Crie e preencha o arquivo **.env** da sua aplicação. Basta copiar os dados do **.env.exemple**.
-
-- ### Banco de dados
-
-O banco de dado utilizado foi o [postgres](https://www.postgresql.org/) com a ORM do [prisma](https://www.prisma.io/), então, verifique se possui o postgres está instalado na sua máquina.
-
-Ao rodar o comando de inicialização do servidor, o banco será criado. Porém, caso queira construí-lo manualmente, rode o comando abaixo:
-
-```
-npx prisma migrate dev
-```
-
-- ### Local
+- ### Rodar localmente
 
 O projeto possui algumas dependências essenciais que requerem a última versão estável de [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/). Portanto, certifique-se de que sua versão em execução local seja compatível.
 
@@ -89,10 +75,24 @@ Em seguida, dentro da pasta criada, execute o seguinte comando para instalar as 
 npm install
 ```
 
+- ### Arquivo **.env**
+
+Crie e preencha o arquivo **.env** da sua aplicação. Basta copiar os dados do **.env.exemple**.
+
 Terminado o processo, basta iniciar a aplicação:
 
 ```
 npm run start
+```
+
+- ### Banco de dados
+
+O banco de dado utilizado foi o [postgres](https://www.postgresql.org/) com a ORM do [prisma](https://www.prisma.io/), então, verifique se possui o postgres está instalado na sua máquina.
+
+Ao rodar o comando de inicialização do servidor, o banco será criado. Porém, caso queira construí-lo manualmente, rode o comando abaixo:
+
+```
+npx prisma migrate dev
 ```
 
 - ### Docker
