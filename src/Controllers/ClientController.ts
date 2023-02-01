@@ -21,7 +21,7 @@ export class ClientController {
 
 		const client = await this.clientService.getClient(cpf);
 
-		return res.status(201).send(client);
+		return res.status(200).send(client);
 	}
 
 	async getAllClients(req: Request, res: Response) {
@@ -32,6 +32,6 @@ export class ClientController {
 			Number(limit)
 		);
 
-		return res.status(201).send(clients);
+		return res.status(200).send(clients);
 	}
 }

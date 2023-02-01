@@ -66,7 +66,7 @@ export class CPFValidator {
 
 	private verifyDuplicateNumbers() {
 		let isEveryEquals: boolean = true;
-		for (let i = this.numberCPF.length; i > 0; i--) {
+		for (let i = this.numberCPF.length - 1; i > 0; i--) {
 			const currentNumber = this.numberCPF[i];
 			if (currentNumber !== this.numberCPF[0]) isEveryEquals = false;
 		}
