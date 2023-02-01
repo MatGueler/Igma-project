@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon ./src/Server.ts",
-    "start": "npx prisma generate && npx prisma migrate dev && node dist/src/Server.js",
+    "start": "npx prisma generate && npx prisma migrate dev && npm run build && node dist/src/Server.js",
     "prisma:migrate": "npx prisma migrate dev",
     "docker:start": "sudo docker compose up --build",
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -- -i --coverage --testPathPattern=Tests/Integration"
