@@ -12,8 +12,6 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-	// await deleteFactory.deleteAllData();
-
 	prisma.$disconnect();
 });
 

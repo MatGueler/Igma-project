@@ -102,4 +102,19 @@ docker:start
 
 ## :hammer: Testando a aplicação
 
+- Testes manuais
+
 Para testar a aplicação, criamos uma collection, o arquivo json está na pasta de Tests.
+
+- Testes automáticos
+
+Os testes automátizados foram criados utilizando o jest, o primeiro passo para testar a aplicação é criar e preencher um arquivo **.env.test** com as variaveis de ambiente presentes na pasta **.env.exemple**.
+
+- **OBS:**
+  Lembre de utilizar a boa prática nos testes, utilize bancos diferentes para a produção e os testes. Um padrão de nomeclatura pode ser o sufixo '\_test' após o nome do banco. Ex: nomeDoBanco_test
+
+Para iniciar os testes, basta inserir o comando abaixo na linha de comando:
+
+```
+npm test
+```
