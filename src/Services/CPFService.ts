@@ -23,9 +23,10 @@ export class CPFValidator {
 			firstSum += Number(this.numberCPF[this.numberCPF.length - i]) * (i - 1);
 		}
 
-		let firstChecker = 11 - (firstSum % 11);
+		const firstDivisionRest = firstSum % 11;
+		const firstChecker = 11 - firstDivisionRest;
 
-		if (firstChecker >= 10) {
+		if (firstDivisionRest < 2) {
 			// Para valor maior ou igual que 10, o verificador deve ser zero
 			if (firstCheckerCPFNumber !== 0) {
 				return false;
@@ -49,9 +50,10 @@ export class CPFValidator {
 			secondSum += Number(this.numberCPF[this.numberCPF.length - i]) * i;
 		}
 
-		let secondChecker = 11 - (secondSum % 11);
+		const secondDivisionRest = secondSum % 11;
+		let secondChecker = 11 - secondDivisionRest;
 
-		if (secondChecker >= 10) {
+		if (secondDivisionRest < 2) {
 			if (secondCheckerCPFNumber !== 0) {
 				return false;
 			}
