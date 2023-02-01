@@ -2,11 +2,11 @@
 
 ## :clipboard: Descrição
 
-O projeto **supermercash** é baseado no problema onde um usuário tem vários mercados próximos a sua residência, e fica na dúvida de qual dos mercados sua **lista de compras** sairia mais barata?
+Essa aplicação serve para gerenciar o banco de dados com os clientes cadastrados, nessa aplicação é possível:
 
-O aplicativo propõe que o usuário monte sua lista de compras com os itens desejados, em seguida serão apresentados os preços de sua compra em cada um dos mercados, disponibilizados em ordem, para que o usuário possa facilmente escolher o melhor **custo-benefício** .
-
-Além de perceber o melhor valor para a compra, o usuário pode realizar a compra pelo próprio aplicativo, utilizando as informações do **cartão do usuário**.
+1.  Criar novos cadastros;
+2.  Buscar um usuário cadastrado pelo cpf;
+3.  Buscar páginas contendo os usuários cadastrados;
 
 ## :computer: Tecnologias e Conceitos
 
@@ -14,6 +14,7 @@ Além de perceber o melhor valor para a compra, o usuário pode realizar a compr
 - Express
 - Node.js (v16.17.0)
 - Typescript
+- Jest
 
 ---
 
@@ -24,7 +25,7 @@ POST '/client'
 - Rota para criar um novo cliente;
 - headers: { }
 - body: {
-    name: "User Name",
+    name: "Nome do cliente",
     cpf: "xxx.xxx.xxx-xx ou xxxxxxxxxxx",
     birthdate: "DD/MM/AAAA",
 }
@@ -40,35 +41,39 @@ GET '/client'
 ```
 
 ```yml
-GET '/clients' ou '/clients?page=1&&limit=5'
-- Route start for the user to choose the next step in the application
+GET '/clients' ou '/clients?page=1&&limit'
+- Rota para buscar os clientes cadastrados com paginação
+- queryParams: {
+    page: 'numero' ou '',
+    limit: 'numero' ou ''
+  }
 - headers: { }
 - body: { }
 ```
 
 - **OBS: O USUÁRIO PODE ESCOLHER A PÁGINA E O NÚMERO DE RESULTDOS QUE APARECERÃO NA PÁGINA POR MEIO DE QUERY PARAMS.**
   <br/>VALOR PADRÃO:
-  PAGE = 1 e LIMIT = 10
+  page = 1 e limit = 10
 
 ---
 
 ## 🏁 Rodando a aplicação
 
-- Arquivo **.env**
+- ### Arquivo **.env**
 
 Crie e preencha o arquivo **.env** da sua aplicação. Basta copiar os dados do **.env.exemple**.
 
-- Banco de dados
+- ### Banco de dados
 
-O banco de dado utilizado foi o [postgres](https://www.postgresql.org/) com a ORM do [prisma](https://www.prisma.io/), então, verifique se possui o postgres instalado na sua máquina.
+O banco de dado utilizado foi o [postgres](https://www.postgresql.org/) com a ORM do [prisma](https://www.prisma.io/), então, verifique se possui o postgres está instalado na sua máquina.
 
 Ao rodar o comando de inicialização do servidor, o banco será criado. Porém, caso queira construí-lo manualmente, rode o comando abaixo:
 
 ```
-napx prisma migrate dev
+npx prisma migrate dev
 ```
 
-- Local
+- ### Local
 
 O projeto possui algumas dependências essenciais que requerem a última versão estável de [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/). Portanto, certifique-se de que sua versão em execução local seja compatível.
 
@@ -78,7 +83,7 @@ Primeiro, clone este repositório em sua máquina:
 git clone git@github.com:MatGueler/Igma-project.git
 ```
 
-Em seguida, dentro da pasta, execute o seguinte comando para instalar as dependências.
+Em seguida, dentro da pasta criada, execute o seguinte comando para instalar as dependências.
 
 ```
 npm install
@@ -90,9 +95,9 @@ Terminado o processo, basta iniciar a aplicação:
 npm run start
 ```
 
-- Docker
+- ### Docker
 
-Para inicializar a aplicação utilizando Docker, é necessário que o docker esteja instalado na sua máquina. Para utilizar nesse projeto, basta inicializar o comando abaixo, sempre lembrando de alterar o arquivo **.env** corretamente:
+Para inicializar a aplicação utilizando Docker, é necessário que o [Docker](https://docs.docker.com/) esteja instalado na sua máquina. Para utilizar nesse projeto, basta inicializar o comando abaixo, sempre lembrando de alterar o arquivo **.env** corretamente:
 
 ```
 docker:start
@@ -102,11 +107,11 @@ docker:start
 
 ## :hammer: Testando a aplicação
 
-- Testes manuais
+- ### Testes manuais
 
-Para testar a aplicação, criamos uma collection, o arquivo json está na pasta de Tests.
+Para testar a aplicação, criamos uma collection, o arquivo json está na pasta de Tests. Assim, basta utilizar esse arquivo para testar em programas como **Thunder Client** ou **Insomnia**.
 
-- Testes automáticos
+- ### Testes automáticos
 
 Os testes automátizados foram criados utilizando o jest, o primeiro passo para testar a aplicação é criar e preencher um arquivo **.env.test** com as variaveis de ambiente presentes na pasta **.env.exemple**.
 
