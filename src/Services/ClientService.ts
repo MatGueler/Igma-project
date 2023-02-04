@@ -11,7 +11,11 @@ export class ClientService extends CPFValidator {
 
 	async createClient(name: string, cpf: string, birthdate: string) {
 		// Remove all chars equals to "-" and "."
-		this.numberCPF = cpf.replace(/[. -]/g, '');
+		if (cpf) {
+			this.numberCPF = cpf.replace(/[. -]/g, '');
+		} else {
+			throw wrongSchemaError('CPF must be valid');
+		}
 
 		// Verify cpf format
 		this.veriffyCPFValidate();
@@ -24,7 +28,11 @@ export class ClientService extends CPFValidator {
 
 	async getClient(cpf: string) {
 		// Remove all chars equals to "-" and "."
-		this.numberCPF = cpf.replace(/[. -]/g, '');
+		if (cpf) {
+			this.numberCPF = cpf.replace(/[. -]/g, '');
+		} else {
+			throw wrongSchemaError('CPF must be valid');
+		}
 
 		// Verify cpf format
 		this.veriffyCPFValidate();

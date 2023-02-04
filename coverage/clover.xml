@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675275191468" clover="3.2.0">
-  <project timestamp="1675275191468" name="All files">
-    <metrics statements="132" coveredstatements="126" conditionals="44" coveredconditionals="33" methods="29" coveredmethods="28" elements="205" coveredelements="187" complexity="0" loc="132" ncloc="132" packages="9" files="12" classes="12"/>
+<coverage generated="1675541307060" clover="3.2.0">
+  <project timestamp="1675541307060" name="All files">
+    <metrics statements="134" coveredstatements="128" conditionals="44" coveredconditionals="33" methods="29" coveredmethods="28" elements="207" coveredelements="189" complexity="0" loc="134" ncloc="134" packages="9" files="12" classes="12"/>
     <package name="Tests.Factories">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="Client.ts" path="/home/mateus/Área de Trabalho/Projetos/Back-end/Igma-project/Tests/Factories/Client.ts">
@@ -110,9 +110,9 @@
       </file>
     </package>
     <package name="src.Services">
-      <metrics statements="57" coveredstatements="54" conditionals="21" coveredconditionals="18" methods="10" coveredmethods="10"/>
+      <metrics statements="59" coveredstatements="56" conditionals="21" coveredconditionals="18" methods="10" coveredmethods="10"/>
       <file name="CPFService.ts" path="/home/mateus/Área de Trabalho/Projetos/Back-end/Igma-project/src/Services/CPFService.ts">
-        <metrics statements="33" coveredstatements="30" conditionals="16" coveredconditionals="13" methods="4" coveredmethods="4"/>
+        <metrics statements="35" coveredstatements="32" conditionals="16" coveredconditionals="13" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="7" count="68" type="cond" truecount="1" falsecount="0"/>
@@ -122,30 +122,32 @@
         <line num="22" count="68" type="stmt"/>
         <line num="23" count="607" type="stmt"/>
         <line num="26" count="68" type="stmt"/>
-        <line num="28" count="68" type="cond" truecount="2" falsecount="0"/>
-        <line num="30" count="8" type="cond" truecount="0" falsecount="1"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="60" type="cond" truecount="1" falsecount="0"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="39" count="67" type="stmt"/>
-        <line num="43" count="67" type="stmt"/>
+        <line num="27" count="68" type="stmt"/>
+        <line num="29" count="68" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="12" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="56" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="67" type="stmt"/>
         <line num="44" count="67" type="stmt"/>
-        <line num="48" count="67" type="stmt"/>
-        <line num="49" count="670" type="stmt"/>
-        <line num="52" count="67" type="stmt"/>
-        <line num="54" count="67" type="cond" truecount="2" falsecount="0"/>
-        <line num="55" count="10" type="cond" truecount="0" falsecount="1"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="59" count="57" type="cond" truecount="0" falsecount="1"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="64" count="67" type="stmt"/>
-        <line num="68" count="67" type="stmt"/>
-        <line num="69" count="67" type="stmt"/>
-        <line num="70" count="670" type="stmt"/>
-        <line num="71" count="670" type="cond" truecount="1" falsecount="0"/>
-        <line num="73" count="67" type="cond" truecount="3" falsecount="0"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="77" count="66" type="stmt"/>
+        <line num="45" count="67" type="stmt"/>
+        <line num="49" count="67" type="stmt"/>
+        <line num="50" count="670" type="stmt"/>
+        <line num="53" count="67" type="stmt"/>
+        <line num="54" count="67" type="stmt"/>
+        <line num="56" count="67" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="14" type="cond" truecount="0" falsecount="1"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="53" type="cond" truecount="0" falsecount="1"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="67" type="stmt"/>
+        <line num="70" count="67" type="stmt"/>
+        <line num="71" count="67" type="stmt"/>
+        <line num="72" count="670" type="stmt"/>
+        <line num="73" count="670" type="cond" truecount="1" falsecount="0"/>
+        <line num="75" count="67" type="cond" truecount="3" falsecount="0"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="66" type="stmt"/>
       </file>
       <file name="ClientService.ts" path="/home/mateus/Área de Trabalho/Projetos/Back-end/Igma-project/src/Services/ClientService.ts">
         <metrics statements="24" coveredstatements="24" conditionals="5" coveredconditionals="5" methods="6" coveredmethods="6"/>
