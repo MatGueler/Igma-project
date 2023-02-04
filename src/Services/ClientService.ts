@@ -44,7 +44,7 @@ export class ClientService extends CPFValidator {
 	}
 
 	async getAllClients(page: number, limit: number) {
-		if (page < 1 || limit < 0) {
+		if (page < 1 || limit < 0 || isNaN(Number(page)) || isNaN(Number(limit))) {
 			throw wrongSchemaError('This of page or limit is invalid');
 		}
 
