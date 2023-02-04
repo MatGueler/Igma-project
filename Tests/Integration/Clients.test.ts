@@ -17,14 +17,14 @@ afterAll(async () => {
 
 const agent = supertest(server);
 
-describe('GET /client', () => {
+describe('GET /clients/all', () => {
 	const clientFactory = new ClientFactory();
 	it('Get clients by page using default values', async () => {
 		for (let i = 0; i < 15; i++) {
 			const body = clientFactory.createClient();
 			await agent.post(`/client`).send(body);
 		}
-		const result = await agent.get(`/clients`).send();
+		const result = await agent.get(`/clients/all`).send();
 		expect(result.status).toBe(200);
 		expect(result.body).toHaveLength(10);
 	});
@@ -34,7 +34,7 @@ describe('GET /client', () => {
 			const body = clientFactory.createClient();
 			await agent.post(`/client`).send(body);
 		}
-		const result = await agent.get(`/clients?page=2`).send();
+		const result = await agent.get(`/clients/all?page=2`).send();
 		expect(result.status).toBe(200);
 		expect(result.body).toHaveLength(5);
 	});
@@ -44,7 +44,7 @@ describe('GET /client', () => {
 			const body = clientFactory.createClient();
 			await agent.post(`/client`).send(body);
 		}
-		const result = await agent.get(`/clients?page=1&&limit=3`).send();
+		const result = await agent.get(`/clients/all?page=1&&limit=3`).send();
 		expect(result.status).toBe(200);
 		expect(result.body).toHaveLength(3);
 	});
@@ -54,7 +54,16 @@ describe('GET /client', () => {
 			const body = clientFactory.createClient();
 			await agent.post(`/client`).send(body);
 		}
-		const result = await agent.get(`/clients?page=-1&&limit=-3`).send();
+		const result = await agent.get(`/clients/all?page=-1&&limit=-3`).send();
+		expect(result.status).toBe(422);
+	});
+
+	it('Get clients using invalid values to page and limit', async () => {
+		for (let i = 0; i < 15; i++) {
+			const body = clientFactory.createClient();
+			await agent.post(`/client`).send(body);
+		}
+		const result = await agent.get(`/clients/all?page=aa&&limit=jj`).send();
 		expect(result.status).toBe(422);
 	});
 });
@@ -66,7 +75,7 @@ describe('GET /client', () => {
 
 		await agent.post(`/client`).send(body);
 
-		const result = await agent.get('/client').send({ cpf: body.cpf });
+		const result = await agent.get(`/client?cpf=${body.cpf}`).send();
 
 		expect(result.status).toBe(200);
 	});
@@ -74,9 +83,15 @@ describe('GET /client', () => {
 	it('Get client by cpf when cpf was not registered', async () => {
 		const body = clientFactory.createClient();
 
-		const result = await agent.get('/client').send({ cpf: body.cpf });
+		const result = await agent.get(`/client?cpf=${body.cpf}`).send();
 
 		expect(result.status).toBe(404);
+	});
+
+	it('Try to get client by cpf when cpf was not send', async () => {
+		const result = await agent.get(`/client`).send();
+
+		expect(result.status).toBe(422);
 	});
 });
 
@@ -111,6 +126,16 @@ describe('POST /client', () => {
 		const body = clientFactory.createClient();
 
 		const result = await agent.post(`/client`).send({ ...body, cpf: '111111' });
+		expect(result.status).toBe(422);
+	});
+
+	it('Try to get client by cpf when cpf was not send', async () => {
+		const body = clientFactory.createClient();
+
+		const result = await agent
+			.post(`/client`)
+			.send({ name: body.name, birthDate: body.birthday });
+
 		expect(result.status).toBe(422);
 	});
 });

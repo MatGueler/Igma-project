@@ -41,7 +41,7 @@ GET '/client?cpf=xxxxxxxxxxx' ou '/client?cpf=xxx.xxx.xxx-xx'
 ```
 
 ```yml
-GET '/clients' ou '/clients?page=1&&limit'
+GET '/clients/all' ou '/clients/all?page=1&&limit'
 - Rota para buscar os clientes cadastrados com paginação
 - queryParams: {
     page: 'numero' ou '',

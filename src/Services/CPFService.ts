@@ -27,7 +27,7 @@ export class CPFValidator {
 		const firstChecker = 11 - firstDivisionRest;
 
 		if (firstDivisionRest < 2) {
-			// Para valor maior ou igual que 10, o verificador deve ser zero
+			// When division if less then 2, check value must be equal 0
 			if (firstCheckerCPFNumber !== 0) {
 				return false;
 			}
