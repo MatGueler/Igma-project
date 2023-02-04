@@ -78,6 +78,12 @@ describe('GET /client', () => {
 
 		expect(result.status).toBe(404);
 	});
+
+	it('Try to get client by cpf when cpf was not send', async () => {
+		const result = await agent.get(`/client`).send();
+
+		expect(result.status).toBe(422);
+	});
 });
 
 describe('POST /client', () => {
@@ -111,6 +117,16 @@ describe('POST /client', () => {
 		const body = clientFactory.createClient();
 
 		const result = await agent.post(`/client`).send({ ...body, cpf: '111111' });
+		expect(result.status).toBe(422);
+	});
+
+	it('Try to get client by cpf when cpf was not send', async () => {
+		const body = clientFactory.createClient();
+
+		const result = await agent
+			.post(`/client`)
+			.send({ name: body.name, birthDate: body.birthday });
+
 		expect(result.status).toBe(422);
 	});
 });
