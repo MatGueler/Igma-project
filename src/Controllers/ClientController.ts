@@ -17,7 +17,7 @@ export class ClientController {
 	}
 
 	async getClientByCPF(req: Request, res: Response) {
-		const { cpf }: { cpf: string } = req.body;
+		const cpf = req.query.cpf as string;
 
 		const client = await this.clientService.getClient(cpf);
 
