@@ -32,10 +32,10 @@ POST '/client'
 ```
 
 ```yml
-GET '/client'
+GET '/client?cpf=xxxxxxxxxxx' ou '/client?cpf=xxx.xxx.xxx-xx'
 - Rota para buscar um cliente pelo cpf cadastrado
 - headers: { }
-- body: {
+- queryParams: {
     cpf: "xxx.xxx.xxx-xx ou xxxxxxxxxxx"
 }
 ```
